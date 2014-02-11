@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>tracEE - Diagnosis context propagation in distributed JavaEE applications</title>
+    <title>TracEE - Diagnosis context propagation in distributed JavaEE applications</title>
 
     <meta name="description" content="TracEE - Diagnosis context propagation in distributed JavaEE applications">
     <meta name="author" content="Daniel Wegener">
@@ -25,6 +25,27 @@
         document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
 
     </script>
+    <!--
+    <style>
+        .reveal a:not(.image) { color: #08c }
+        .reveal a:not(.image):hover { color: #005580 }
+        .reveal .controls div.navigate-left.enabled:hover { border-right-color: #005580; }
+        .reveal .controls div.navigate-right.enabled:hover { border-left-color: #005580; }
+        .reveal .controls div.navigate-up.enabled:hover { border-bottom-color: #005580; }
+        .reveal .controls div.navigate-down.enabled:hover { border-top-color: #005580; }
+        .reveal .controls div.navigate-left.enabled { border-right-color: #49afcd; }
+        .reveal .controls div.navigate-right.enabled { border-left-color: #49afcd; }
+        .reveal .controls div.navigate-up.enabled { border-bottom-color: #49afcd; }
+        .reveal .controls div.navigate-down.enabled { border-top-color: #49afcd; }
+        .reveal section img.transparent {
+            border: 0;
+            box-shadow: 0 0 0;
+        }
+        .reveal .pause-overlay {
+            background-color: #fff;
+        }
+    </style>
+    -->
 
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
@@ -46,149 +67,14 @@
                 <small><a href="https://github.com/holisticon/tracee">https://github.com/holisticon/tracee</a></small>
             </p>
         </section>
-
-
-        <section>
-            <blockquote>
-                &ldquo;What <strong>caused</strong> this *** Exception
-            </blockquote>
         </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                * grep catalina.out/server.log ...
-                * No fun on many™ machines
-                * Log aggregator (Kibana?)
-                * Find exception
-                * Filter thread
-                * This works for one “system”
-                * Prove
-            </script>
-
-
-            <aside class="notes">
-                none
-            </aside>
-        </section>
-
-        <section>
-            <h2>tracEE to the rescue</h2>
-        </section>
-
-        <section>
-            <h2>Supports</h2>
-            <ul>
-                <li>Transports or 'invents' invocation context data</li>
-                <li>Enriches logging (MDC)</li>
-                <li>Propagates context to remote systems</li>
-                <li>Propagates context through asynchronous processing (JMS, Servlet3 async)</li>
-            </ul>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## What is a context (in terms of tracEE)?
-
-                * RequestId
-                * Incoming Http-Paramter
-                * or _artificial_
-                * SessionId (masked)
-                * CorrelationId from external system
-                * ConversationId from fat browser app
-                * SSO-Token
-            </script>
-        </section>
-
-        <section>
-            tbd: Nice picture of standard flow with browser/servlet/soap-backend
-        </section>
-
-        <section>
-            <img src="assets/here_comes_tracee.jpg"/>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## How to use?
-
-                * Configure “Incoming-Handlers”
-                * TraceeFilter (Servlet)
-                * or SpringTraceeFilter (Spring Interceptor)
-                * or TraceeServerHandler (SOAP)
-                * Configure “Propagators”
-                * HttpClientPropagator (Apache HttpClient, REST)
-                * TraceeClientHandler (SOAP)
-            </script>
-        </section>
-
-        <section>
-            <h2>Configure Logging</h2>
-            Context is accessible from MDC
-					<pre><code data-trim contenteditable>
-                        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-                            <layout>
-                                <Pattern>rqId: %X{requestId} sId: %X{sessionId} - %m%n</Pattern>
-                            </layout>
-                        </appender>
-                    </code></pre>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Profit!
-
-                Lets look at Kibana again
-                Find an exception:
-
-                2013-12-05 12:40:00,911 rxId:AFFEB00B1337 sId: 1342536546576
-                ERROR [de.random.impl.ServingServiceBean] (ajp-172.27.138.131-11009-60)
-                Exception during auth: Bad bongo
-
-
-                Now search for “AFFEB00B1337” and you will find ANY log entry that was raised by this user interaction with the system
-
-                Or search for “1342536546576” and you will find ANY log entry that was raised because of a user interaction from the user with this session
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## Inside tracEE
-
-                * Expectation: JavaEE = thread-per-connection
-                * Exceptions: AsyncServlet, JMS
-                * Storing context in a ThreadLocal
-                * Reusing the MDC
-                * Or use a simple ThreadLocalBackend
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## I can haz more?
-
-                * Exception-Logging with full protocol specific  (wire HTTP-Requests) invocation parameters
-                * SessionLifecycleListener stores sessionId in the context as soon as it exists
-                * SPI: Roll your own Protocol-Adapters
-            </script>
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                ## known limitations
-
-                * RemoteEJB cannot be supported by spec. Custom container implementations might work.
-
-                * Accumulation of sessions from different frontends might be difficult.
-            </script>
-        </section>
-
-        <section>
-            <h1>THE END</h1>
-
-            <h3>BY Daniel Wegener, Tobias Gindler / <a href="https://www.holisticon.de">holisticon.de</a></h3>
-        </section>
-
+        <section data-markdown="slides.md" data-separator="^<!-- click -->" data-vertical="^<!-- down -->" data-notes='^Notes:'></section>
+        <section data-markdown="slides_more.md" data-separator="^<!-- click -->" data-vertical="^<!-- down -->" data-notes='^Notes:'></section>
     </div>
 
 </div>
+
+<div style="position: absolute; right: 120px; bottom: 5%; max-width: 15%; overflow: hidden;"><img src="assets/holisticon-logo.png" width="200" height="32" class="transparent" style="height: 100%; width: 100%" /></div>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
@@ -204,7 +90,7 @@
         center: true,
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        transition: Reveal.getQueryHash().transition || 'fade', // default/cube/page/concave/zoom/linear/fade/none
 
         // Parallax scrolling
         // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
