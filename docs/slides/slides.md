@@ -68,13 +68,13 @@ We lost our _system interaction_ context!
 Example again:
 
 ```ini
-2014-02-11 15:35:04.127 [rxId:BAB0 sessionId:AFF3] [tomcat-exec-1] INFO
+2014-02-11 15:35:04.127 [rxId:BABO sessionId:AFF3] [tomcat-exec-1] INFO
   my.business.webapp.Servlet - Calling the backend for user Alice now!
 2014-02-11 15:35:04.128 [rxId:BABA sessionId:EEEE] [tomcat-exec-2] INFO
   my.business.webapp.Servlet - Calling the backend for user Bob now!
 2014-02-11 15:35:05.999 [rxId:BABA sessionId:EEEE] [jboss-exec-15] INFO
   my.business.backend.Service - Everything went fine!
-2014-02-11 15:35:05.999 [rxId:BAB0 sessionId:AFF3] [jboss-exec-21] WARN
+2014-02-11 15:35:05.999 [rxId:BABO sessionId:AFF3] [jboss-exec-21] WARN
   my.business.backend.Service - Something went terribly wrong!
 ```
 

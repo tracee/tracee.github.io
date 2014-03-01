@@ -20,7 +20,7 @@
 <!-- click -->
 
 To be drawn
-![System overview](assets/here_comes_tracee.jpg)
+![System overview](/assets/here_comes_tracee.jpg)
 
 <!-- click -->
 
