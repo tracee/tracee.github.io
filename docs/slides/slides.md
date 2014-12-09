@@ -4,7 +4,7 @@ Monitoring distributed Java enterprise applications is __hard__.
 
 You have: A bunch of log files on many™ machines.
 
-You hopefully have: A central place where you aggregate your logs.
+You maybe have: A central place where you aggregate your logs.
 
 Each log statement has a logging-context.
 
@@ -59,13 +59,13 @@ We lost our _system interaction_ context!
 ### How does TracEE fit in?
 
 * TracEE __emits__ additional context data (requestId, sessionId)
-* TracEE __transmits__ the logging context over system borders
+* TracEE __propagates the invocation context__ over system borders
 
 <!-- click -->
 
 ### TracEE in action
 
-Example again:
+More useful example:
 
 ```ini
 2014-02-11 15:35:04.127 [rxId:BABO sessionId:AFF3] [tomcat-exec-1] INFO
@@ -86,9 +86,6 @@ Example again:
 * Exception causing system interactions can now be traced back to their initial request!
 
 <!-- click -->
-
-### 5 MINUTES OVER
-
 
 # THANKS
 
