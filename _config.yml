@@ -10,3 +10,6 @@ gems:
   - jemoji
   - jekyll-redirect-from
   - jekyll-sitemap
+name: TracEE
+url: http://tracee.io
+#description: TODO: A description for your blog
