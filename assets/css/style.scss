@@ -1,3 +1,41 @@
+---
+---
+
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+@mixin transition-property($property...) {
+  -moz-transition-property:    $property;
+  -o-transition-property:      $property;
+  -webkit-transition-property: $property;
+  transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+  -moz-transition-property:    $duration;
+  -o-transition-property:      $duration;
+  -webkit-transition-property: $duration;
+  transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function:    $timing;
+  -o-transition-timing-function:      $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+  -moz-transition-delay:    $delay;
+  -o-transition-delay:      $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay:         $delay;
+}
+
+$primary-color: #00b3fe;
+$secondary-color: #384452;
+$background-color: #fff;
+
 /*	################################################################
 
 	Author: Carlos Alvarez
@@ -7,7 +45,7 @@
 	Version: 1.0
 	URL: http://alvarez.is
 	
-################################################################# */ 
+################################################################# */
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,900);
 @import url("prettyPhoto.css") screen;
@@ -16,16 +54,16 @@
 /*	################################################################
 	1. GENERAL STRUCTURES
 ################################################################# */
-	* { 
+	* {
 		margin: 0;
-		padding: 0px;
-	} 
+		padding: 0;
+	}
 
-body { 
-	background: #ffffff; 
-	margin: 0; 
-	height: 100%; 
-	color: #384452;
+body {
+	background: $background-color;
+	margin: 0;
+	height: 100%;
+	color: $secondary-color;
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	}
@@ -35,15 +73,15 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 }
 
-p { 
-	padding: 0; 
-	margin-bottom: 12px; 
+p {
+	padding: 0;
+	margin-bottom: 12px;
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
-	font-size: 14px; 
+	font-size: 14px;
 	line-height: 24px;
-	color: #384452; 
-	margin-top: 10px; 
+	color: $secondary-color;
+	margin-top: 10px;
 }
 
 img {
@@ -51,15 +89,11 @@ img {
 	max-width: 100%;
 }
 
-a { 
+a {
 	padding: 0;
 	margin: 0;
-	text-decoration: none; 
-	-webkit-transition: background-color .4s linear, color .4s linear;
-	-moz-transition: background-color .4s linear, color .4s linear;
-	-o-transition: background-color .4s linear, color .4s linear;
-	-ms-transition: background-color .4s linear, color .4s linear;
-	transition: background-color .4s linear, color .4s linear;
+	text-decoration: none;
+  	@include transition(background-color .4s linear, color .4s linear)
 }
 a:hover,
 a:focus {
@@ -68,12 +102,12 @@ a:focus {
 }
 
 ::-moz-selection  {
-	color: #fff;
+	color: $background-color;
 	text-shadow:none;
 	background:#2B2E31;
 }
 ::selection {
-	color: #fff;
+	color: $background-color;
 	text-shadow:none;
 	background:#2B2E31;
 }
@@ -82,13 +116,13 @@ a:focus {
 	text-align: center
 }
 
-/*	################################################################
+/*################################################################
 	BOOTSTRAP MODIFICATIONS & TWEAKS
 ################################################################# */
 .navbar {
 	min-height: 70px;
 	padding-top: 10px;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .navbar-brand {
@@ -107,21 +141,21 @@ a:focus {
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-	color: #00b3fe;
+	color: $primary-color;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #00b3fe;
+	color: $primary-color;
 	background-color: transparent;
 }
 
 .navbar-default {
-	background-color: #384452;
+	background-color: $secondary-color;
 	border-color: transparent;
 }
 
 .dropdown-menu {
-	background: #384452;
+	background: $secondary-color;
 }
 
 .dropdown-menu > li > a {
@@ -131,9 +165,9 @@ a:focus {
 }
 
 .btn-theme {
-  color: #fff;
-  background-color: #384452;
-  border-color: #384452;
+  color: $background-color;
+  background-color: $secondary-color;
+  border-color: $secondary-color;
   margin: 4px;
 }
 .btn-theme:hover,
@@ -141,42 +175,38 @@ a:focus {
 .btn-theme:active,
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
-  color: #fff;
-  background-color: #00b3fe;
-  border-color: #00b3fe;
+  color: $background-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
 
 .dmbutton:hover,
 .dmbutton:active,
 .dmbutton:focus{
-	color: #ffffff;
+	color: $background-color;
 	background-color: #222222;
-	border-color: #ffffff;
+	border-color: $background-color;
 }
+
 .dmbutton {
-	background:rgba(0, 0, 0, 0);
-	border: 1px solid #ffffff;
-	color: #ffffff;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
-	padding-top: 1.025rem;
-	padding-right: 2.25rem;
-	letter-spacing:0.85px;
-	padding-bottom: 1.0875rem;
-	padding-left: 2.25rem;
-	font-size: 1.55rem;
-	cursor: pointer;
-	font-weight: normal;
-	line-height: normal;
-	margin: 0 0 1.25rem;
-	text-decoration: none;
-	text-align: center;
-	display: inline-block;
-	-webkit-transition: background-color 300ms ease-out;
-	-moz-transition: background-color 300ms ease-out;
-	transition: background-color 300ms ease-out;
-	-webkit-appearance: none;
-	font-weight: normal !important;
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid $background-color;
+  color: $background-color;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  letter-spacing: 0.85px;
+  padding: 1.025rem 2.25rem 1.0875rem;
+  font-size: 1.55rem;
+  cursor: pointer;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  @include transition(background-color 300ms ease-out);
+  -webkit-appearance: none;
+  font-weight: normal;
+  font-weight: normal !important;
 }
 
 .mtb {
@@ -193,11 +223,11 @@ a:focus {
 }
 
 .hline {
-	border-bottom: 2px solid #384452;
+	border-bottom: 2px solid $secondary-color;
 }
 
 .hline-w {
-	border-bottom: 2px solid #ffffff;
+	border-bottom: 2px solid $background-color;
 	margin-bottom: 25px;
 }
 /*	################################################################
@@ -205,10 +235,10 @@ a:focus {
 ################################################################# */
 
 #headerwrap {
-	background-color: #00b3fe;
-	min-height: 550px;
+	background-color: $primary-color;
+	min-height: 400px;
 	padding-top: 100px;
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	text-align: center;
 }
 
@@ -233,7 +263,7 @@ a:focus {
 }
 
 #service i {
-	color: #00b3fe;
+	color: $primary-color;
 	font-size: 60px;
 	padding: 15px;
 }
@@ -258,13 +288,13 @@ a:focus {
 
 
 .portfolio-item .title:before {border-radius:0; display:none}
-.portfolio-item p {margin:0px 0 30px;}
+.portfolio-item p {margin:0 0 30px;}
 .portfolio-item h3 {margin:-10px 0 10px; font-size:16px; text-transform:uppercase;}
 
 
 .tpl6 h3
 {
-	color:#fff;
+	color:$background-color;
 	margin:0;
 	padding:40px 5px 0;
 	font-size:16px;
@@ -281,22 +311,22 @@ a:focus {
 {
 	height:100%;
 	width:100%;
-	background-color:#00b3fe;
-	background-color:rgba(0,179,254,.9);
+	background-color: $primary-color;
+	/**background-color: rgba(0,179,254,.9);**/
 	text-align:center;
 }
 
 /* Testimonials Wrap */
 #twrap {
 	background: url(../img/t-back.jpg) no-repeat center top;
-	margin-top: 0px;
+	margin-top: 0;
 	padding-top:60px;
 	text-align:center;
 	background-attachment: relative;
 	background-position: center center;
 	min-height: 450px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -310,12 +340,12 @@ a:focus {
 
 #twrap i {
 	font-size: 50px;
-	color: white;
+	color: $background-color;
 	margin-bottom: 25px;
 }
 
 #twrap p {
-	color: white;
+	color: $background-color;
 	font-size: 15px;
 	line-height: 30px;
 }
@@ -323,7 +353,7 @@ a:focus {
 /* clients logo */
 #cwrap {
 	background: #f7f7f7;
-	margin-top: 0px;
+	margin-top: 0;
 	padding-top: 80px;
 	padding-bottom: 100px;
 }
@@ -336,7 +366,7 @@ a:focus {
 #footerwrap {
 	padding-top: 60px;
 	padding-bottom: 60px;
-	background: #384452;
+	background: $secondary-color;
 }
 
 #footerwrap p {
@@ -344,7 +374,7 @@ a:focus {
 }
 
 #footerwrap h4 {
-	color: white;
+	color: $background-color;
 }
 
 #footerwrap i {
@@ -354,14 +384,14 @@ a:focus {
 }
 
 #footerwrap i:hover {
-	color: #00b3fe
+	color: $primary-color
 }
 
 #footerwrap a {
-	color: white
+	color: $background-color
 }
 #footerwrap a:hover {
-	color: #00b3fe
+	color: $primary-color
 }
 
 /*	################################################################
@@ -370,7 +400,7 @@ a:focus {
 /* General Tweaks */
 
 #blue {
-	background: #00b3fe;
+	background: $primary-color;
 	margin-top: 60px;
 	margin-bottom: 60px;
 	padding-top: 25px;
@@ -378,21 +408,21 @@ a:focus {
 }
 
 #blue h3 {
-	color: white;
+	color: $background-color;
 	margin-left: 15px;
 }
 
 .ctitle {
-	color: #00b3fe;
+	color: $primary-color;
 	font-weight: 700;
 	margin-bottom: 15px;
 }
 
-csmall {
+.csmall {
 	font-size: 12px;
 	color: #b3b3b3;
 }
-csmall2 {
+.csmall2 {
 	font-size: 12px;
 	color: #f39c12
 }
@@ -403,7 +433,7 @@ csmall2 {
 }
 
 .badge-theme {
-	background: #00b3fe;
+	background: $primary-color;
 }
 
 /* Contact Page */
@@ -416,7 +446,7 @@ csmall2 {
 	background-position: center center;
 	min-height: 400px;
 	width: 100%;
-	
+
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -429,27 +459,27 @@ csmall2 {
 }
 
 /* Blog Page */
-.popular-posts { 
-	margin: 0px;
-	padding-left: 0px;
+.popular-posts {
+	margin: 0;
+	padding-left: 0;
 	}
-	
+
 .popular-posts li {
-	list-style: none; 
-	margin-bottom: 20px; 
+	list-style: none;
+	margin-bottom: 20px;
 	min-height: 70px;
 }
-.popular-posts li a, 
+.popular-posts li a,
 .popular-posts li a:hover {
-	color:#2f2f2f; 
+	color:#2f2f2f;
 	text-decoration: none;
 	}
-	
+
 .popular-posts li img {
-	float: left; 
+	float: left;
 	margin-right: 20px;
 	}
-	
+
 .popular-posts li em {
 	font-family: 'Lato', sans-serif;
 	font-size: 12px;
@@ -459,7 +489,7 @@ csmall2 {
 .popular-posts p {
 	line-height: normal;
 	margin-bottom: auto;
-}	
+}
 
 .share i {
 	padding-right: 15px;
