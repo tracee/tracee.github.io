@@ -1,6 +1,11 @@
+---
+layout:
+title: Blog
+---
 <!DOCTYPE html>
 <html lang="en">
 {% include head.html %}
+
   <body>
 
   {% include navbar.html %}
@@ -11,7 +16,7 @@
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
-				<h3>{{ page.title }}</h3>
+				<h3>News.</h3>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /blue -->
@@ -24,15 +29,26 @@
 	 <div class="container mtb">
 	 	<div class="row">
 	 	
-	 		<! -- SINGLE POST -->
+	 		<! -- BLOG POSTS LIST -->
 	 		<div class="col-lg-8">
-	 			{{ page.content }}
+				{% for post in site.posts limit: 5 %}
+				<p><img class="img-responsive" src="{{ post.image }}"></p>
+				<a href="{{ post.url }}"><h3 class="ctitle">{{ post.title }}</h3></a>
+				<p><csmall>Posted: {{ post.date | date_to_string }}.</csmall> | <csmall2>By: Admin - 3 Comments</csmall2></p>
+				{{ post.excerpt }}
+				<p><a href="{{ post.url }}">[Read More]</a></p>
+				<div class="hline"></div>
+				<div class="spacing"></div>
+				{% endfor %}
+
 			</div><! --/col-lg-8 -->
 
 			{% include post_sidebar.html %}
 
-		</div><! --/row -->
+
+	 	</div><! --/row -->
 	 </div><! --/container -->
+
 
   {% include footer.html %}
 	 
