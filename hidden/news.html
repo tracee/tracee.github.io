@@ -32,9 +32,9 @@ title: Blog
 	 		<! -- BLOG POSTS LIST -->
 	 		<div class="col-lg-8">
 				{% for post in site.posts limit: 5 %}
-				<p><img class="img-responsive" src="{{ post.image }}"></p>
+				{% if post.image != empty %}<p><img class="img-responsive" src="{{ post.image }}"></p>{% endif %}
 				<a href="{{ post.url }}"><h3 class="ctitle">{{ post.title }}</h3></a>
-				<p><csmall>Posted: {{ post.date | date_to_string }}.</csmall> | <csmall2>By: Admin - 3 Comments</csmall2></p>
+				<p><csmall>Posted: {{ post.date | date_to_string }}.</csmall> | <csmall2>By: {{ post.author }}</csmall2></p>
 				{{ post.excerpt }}
 				<p><a href="{{ post.url }}">[Read More]</a></p>
 				<div class="hline"></div>
