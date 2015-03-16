@@ -12,4 +12,5 @@ gems:
   - jekyll-sitemap
 name: TracEE
 url: http://tracee.io
+highlighter: pygments
 #description: TODO: A description for your blog
