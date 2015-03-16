@@ -12,5 +12,12 @@ gems:
   - jekyll-sitemap
 name: TracEE
 url: http://tracee.io
+
+markdown: redcarpet
+
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript","tables", "with_toc_data"]
+
+
 highlighter: pygments
 #description: TODO: A description for your blog
