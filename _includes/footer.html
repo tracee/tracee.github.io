@@ -22,9 +22,9 @@
                 <h4>Developed by</h4>
                 <div class="hline-w"></div>
                 <ul>
-                    <li><a href="#">@danielwegener</a></li>
-                    <li><a href="#">@tobiasgindler</a></li>
-                    <li><a href="#">@SvenBunge</a></li>
+                    {%for contributor in site.github.contributors %}
+                    <li><a href="{{contributor.html_url}}">@{{contributor.login}}</a></li>
+                    {%endfor%}
                 </ul>
             </div>
 

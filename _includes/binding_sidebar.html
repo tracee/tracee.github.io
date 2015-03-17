@@ -12,10 +12,10 @@
     <div class="spacing"></div>
     -->
 
-    {% if page.toc %}
+    {% if page.toc != empty %}
     <h4>Content</h4>
     <div class="hline"></div>
-    <ul>
+    <ul class="popular-posts">
     {% for entry in page.toc %}
         <li><a href="#{{ entry | slugify }}">{{ entry }}</a></li>
     {% endfor %}
@@ -26,15 +26,17 @@
 
 
     {% if site.posts != empty %}
-    <h4>Recent Posts</h4>
+    <h4>Other bindings</h4>
     <div class="hline"></div>
     <ul class="popular-posts">
-        {% for post in site.posts limit: 5 %}
+        {% for p in site.html_pages | sort:"title" %}
+        {%if p.dir == "/bindings" %}
+        {%unless p.url == page.url %}
         <li>
-            <a href="{{ post.url }}">{% if post.thumbnail %}<img src="{{ post.thumbnail }}" alt="{{ post.title }}">{% endif %}</a>
-            <p><a href="{{ post.url }}">{{ post.title }}</a></p>
-            <em>Posted on {{ post.date | date_to_string }}</em>
+            <p><a href="{{ p.url }}">{{ p.title }}</a></p>
         </li>
+        {% endunless %}
+        {% endif %}
         {% endfor %}
     </ul>
     <div class="spacing"></div>
