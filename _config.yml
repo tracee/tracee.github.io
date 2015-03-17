@@ -5,8 +5,9 @@ defaults:
       path: "" # an empty string here means all files in the project
     values:
       layout: "post"
+      order: 100
 gems:
-  - jekyll-mentions
+#  - jekyll-mentions cannot be used since it replaces annotations in java code with links to their github user counterparts :)
   - jemoji
   - jekyll-redirect-from
   - jekyll-sitemap

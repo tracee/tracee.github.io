@@ -8,23 +8,71 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/hidden/index.html">TracEE</a>
+            <a class="navbar-brand" href="/">TracEE</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
+
+            <!--
+            <ul class="nav navbar-nav">
+                {% for node in site.html_pages %}
+                {% assign node_url_parts = node.url | split: '/' %}
+                {% assign node_url_parts_size = node_url_parts | size %}
+                {% assign filename = node_url_parts | last %}
+                <li><a href='{{node.url}}'>{{node.url}}</a></li>
+                {% endfor %}
+            </ul>-->
+
+            {% assign pages_by_dir = (site.html_pages | group_by:"dir" %}
+            {% assign rootpages = (site.html_pages | where:"dir", "/" | sort:"order" ) %}
+            <ul class="nav navbar-nav">
+            {% for p in rootpages %}
+                {% assign menu_name = p.menu_name %}
+                {% if menu_name == null %}
+                {% assign menu_name = p.title %}
+                {% endif %}
+                {% assign subpageDirectory = (p.url | remove_first:'.html' | remove_first:'/' | prepend:'/') %}
+                {% assign subpages = site.html_pages | where:"dir", subpageDirectory %}
+                {% if subpages == empty %}
+                <li{% if p.url == page.url %} class="active"{% endif %}><a href="{{ p.url }}">{{ menu_name }} </a></li>
+                {% else %}
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menu_name }}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        {% for p2 in subpages %}
+                        {% assign p2menu_name = p2.menu_name %}
+                        {% if p2menu_name == null %}
+                        {% assign p2menu_name = p2.title %}
+                        {% endif %}
+                        <li {% if p2.url == page.url %} class="active"{% endif %}><a href="{{p2.url}}">{{p2menu_name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+
+
+            <!--
             <ul class="nav navbar-nav">
                 <li {% if page.url == "/hidden/index.html" %} class="active" {% endif %}><a href="/hidden/index.html">HOME</a></li>
-                <li {% if page.url == "/hidden/news.html" %} class="active" {% endif %}><a href="/hidden/news.html">NEWS</a></li>
+                <li {% if page.url == "/hidden/releases.html" %} class="active" {% endif %}><a href="/hidden/releases.html">RELEASES</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">DOCUMENTATION <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li {% if page.url == "/hidden/about.html" %} class="active" {% endif %}><a href="/hidden/about.html">GET STARTED</a></li>
                         <li {% if page.url == "/hidden/index.html" %} class="active" {% endif %}><a href="/hidden/about.html">MODULES</a></li>
                         <li {% if page.url == "/hidden/index.html" %} class="active" {% endif %}><a href="/hidden/about.html">EXAMPLES</a></li>
-                        <li {% if page.url == "/hidden/single-project.html" %} class="active" {% endif %}><a href="/hidden/single-project.html">SINGLE PROJECT</a></li>
+                        <li {% if page.url == "/hidden/documentation/single-project.html" %} class="active" {% endif %}><a href="/hidden/documentation/single-project.html">SINGLE PROJECT</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">BINDINGS <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li {% if page.url == /hidden/bindings/jax-ws.html %} class="active" {% endif %}><a href="/hidden/bindings/jax-ws.html">JAX-WS</a></li>
                     </ul>
                 </li>
                 <li><a href="https://github.com/tracee/tracee">C<i class="fa fa-github"></i>DE</a></li>
             </ul>
+            -->
         </div><!--/.nav-collapse -->
     </div>
 </div>

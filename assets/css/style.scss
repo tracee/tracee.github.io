@@ -35,7 +35,7 @@
 $primary-color: #00b3fe;
 $secondary-color: #384452;
 $background-color: #fff;
-
+$font-on-secondary: #bfc9d3;
 /*	################################################################
 
 	Author: Carlos Alvarez
@@ -370,7 +370,7 @@ a:focus {
 }
 
 #footerwrap p {
-	color: #bfc9d3;
+	color: $font-on-secondary;
 }
 
 #footerwrap h4 {
@@ -379,7 +379,7 @@ a:focus {
 
 #footerwrap i {
 	font-size: 30px;
-	color: #bfc9d3;
+	color: $font-on-secondary;
 	padding-right: 25px;
 }
 
@@ -494,4 +494,8 @@ a:focus {
 .share i {
 	padding-right: 15px;
 	font-size: 18px;
+}
+
+.nav.navbar-nav>li>a {
+  text-transform: uppercase;
 }

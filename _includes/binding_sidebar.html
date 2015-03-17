@@ -1,0 +1,54 @@
+<! -- SIDEBAR -->
+<div class="col-lg-4">
+
+    <!--
+    <h4>Search</h4>
+    <div class="hline"></div>
+    <p>
+        <br/>
+        <input type="text" class="form-control" placeholder="Search something">
+    </p>
+
+    <div class="spacing"></div>
+    -->
+
+    {% if page.toc %}
+    <h4>Content</h4>
+    <div class="hline"></div>
+    <ul>
+    {% for entry in page.toc %}
+        <li><a href="#{{ entry | slugify }}">{{ entry }}</a></li>
+    {% endfor %}
+    </ul>
+    <div class="spacing"></div>
+    {% endif %}
+
+
+
+    {% if site.posts != empty %}
+    <h4>Recent Posts</h4>
+    <div class="hline"></div>
+    <ul class="popular-posts">
+        {% for post in site.posts limit: 5 %}
+        <li>
+            <a href="{{ post.url }}">{% if post.thumbnail %}<img src="{{ post.thumbnail }}" alt="{{ post.title }}">{% endif %}</a>
+            <p><a href="{{ post.url }}">{{ post.title }}</a></p>
+            <em>Posted on {{ post.date | date_to_string }}</em>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="spacing"></div>
+    {% endif %}
+
+    {% if site.tags != empty %}
+    <h4>Tags</h4>
+    <div class="hline"></div>
+    <p>
+        {% for tag in page.tags %}
+        <a class="btn btn-theme" href="#" role="button">{{ tag }}</a>
+        {% endfor %}
+    </p>
+    {% endif %}
+</div>
+</div><! --/row -->
+</div><! --/container -->
