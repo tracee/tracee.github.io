@@ -33,12 +33,14 @@ order: 10
 	 		<! -- BLOG POSTS LIST -->
 	 		<div class="col-lg-12">
 
-                {%for repo in site.github.public_repositories%}
+                {%for repo in site.github.public_repositories% | sort:"stargazers_count" reversed %}
+                {%unless repo.full_name == "tracee/tracee.github.io" %}
                 <a href="{{ repo.html_url }}"><h3 class="ctitle">{{ repo.full_name }}</h3></a>
                 <p>{{ repo.description }}</p>
                 <p><a href="{{ repo.html_url }}/releases">[releases]</a></p>
                 <div class="hline"></div>
                 <div class="spacing"></div>
+                {%endunless%}
                 {%endfor%}
 
                 <!--
