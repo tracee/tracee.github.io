@@ -9,11 +9,11 @@
     <div class="hline"></div>
     <ul class="popular-posts">
         {% for ob in site.html_pages | where:"dir", "/bindings" | sort:"title" %}
-        {%if ob.url == page.url %}
+        {%unless ob.url == page.url %}
         <li>
             <p><a href="{{ ob.url }}">{{ ob.title }}</a></p>
         </li>
-        {% endif %}
+        {% endunless %}
         {% endfor %}
     </ul>
     <div class="spacing"></div>
