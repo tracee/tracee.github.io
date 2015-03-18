@@ -5,15 +5,16 @@
     {% include toc_snippet.html %}
 
 
-    <h4>Other bindings</h4>
+    <h4>More bindings</h4>
     <div class="hline"></div>
     <ul class="popular-posts">
-        {% for ob in site.html_pages | where:"dir", "/bindings" | sort:"title" %}
-        {%unless ob.url == page.url %}
+        {% assign binding_pages = (site.html_pages | where:"dir", "/bindings" | sort:"title" %}
+        {% for ob in binding_pages %}
+        {%if ob.url != page.url %}
         <li>
             <p><a href="{{ ob.url }}">{{ ob.title }}</a></p>
         </li>
-        {% endunless %}
+        {% endif %}
         {% endfor %}
     </ul>
     <div class="spacing"></div>
