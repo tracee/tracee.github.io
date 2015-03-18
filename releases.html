@@ -29,7 +29,8 @@ order: 10
 
 	 <div class="container mtb">
 	 	<div class="row">
-	 	
+
+            {%if site.github.public_repositories != null %}
 	 		<! -- BLOG POSTS LIST -->
 	 		<div class="col-lg-12">
                 {%assign reposByStars = site.github.public_repositories | sort:"stargazers_count" %}
@@ -55,6 +56,7 @@ order: 10
 				{% endfor %}-->
 
 			</div><! --/col-lg-12 -->
+            {%endif%}
 
 	 	</div><! --/row -->
 	 </div><! --/container -->

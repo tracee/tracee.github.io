@@ -1,5 +1,5 @@
 ---
-title: TracEE JAX-WS
+title: TracEE binding for JAX-WS
 category: bindings
 layout: binding
 toc:
@@ -7,11 +7,9 @@ toc:
     - Using client side handlers
     - Background
 menu_name: JAX-WS
-see_also:
-    - /bindings/jax-rs2.html
 ---
 
-> This module can be used to add TracEE context propagation support to JAX-WS webservices and JAX-WS webservice clients.
+> This module can be used to add TracEE context propagation support to Java API for XML Web Services (JAX-WS) API for endpoints and webservice clients.
 
 Please add the following dependencies to enable TracEE JAX-WS support. For example in maven-style projects add to the pom.xml:
 
