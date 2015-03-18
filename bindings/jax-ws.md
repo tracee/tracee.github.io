@@ -7,6 +7,8 @@ toc:
     - Using client side handlers
     - Background
 menu_name: JAX-WS
+see_also:
+    - /bindings/jax-rs2.html
 ---
 
 > This module can be used to add TracEE context propagation support to JAX-WS webservices and JAX-WS webservice clients.

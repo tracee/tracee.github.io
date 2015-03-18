@@ -1,56 +1,25 @@
 <! -- SIDEBAR -->
 <div class="col-lg-4">
 
-    <!--
-    <h4>Search</h4>
-    <div class="hline"></div>
-    <p>
-        <br/>
-        <input type="text" class="form-control" placeholder="Search something">
-    </p>
 
-    <div class="spacing"></div>
-    -->
-
-    {% if page.toc != empty %}
-    <h4>Content</h4>
-    <div class="hline"></div>
-    <ul class="popular-posts">
-    {% for entry in page.toc %}
-        <li><a href="#{{ entry | slugify }}">{{ entry }}</a></li>
-    {% endfor %}
-    </ul>
-    <div class="spacing"></div>
-    {% endif %}
+    {% include toc_snippet.html %}
 
 
-
-    {% if site.posts != empty %}
     <h4>Other bindings</h4>
     <div class="hline"></div>
     <ul class="popular-posts">
-        {% for p in site.html_pages | sort:"title" %}
-        {%if p.dir == "/bindings" %}
-        {%unless p.url == page.url %}
+        {% for ob in site.html_pages | where:"dir", "/bindings" | sort:"title" %}
+        {%if ob.url == page.url %}
         <li>
-            <p><a href="{{ p.url }}">{{ p.title }}</a></p>
+            <p><a href="{{ ob.url }}">{{ ob.title }}</a></p>
         </li>
-        {% endunless %}
         {% endif %}
         {% endfor %}
     </ul>
     <div class="spacing"></div>
-    {% endif %}
 
-    {% if site.tags != empty %}
-    <h4>Tags</h4>
-    <div class="hline"></div>
-    <p>
-        {% for tag in page.tags %}
-        <a class="btn btn-theme" href="#" role="button">{{ tag }}</a>
-        {% endfor %}
-    </p>
-    {% endif %}
+    {% include see_also_snippet.html %}
+
 </div>
 </div><! --/row -->
 </div><! --/container -->

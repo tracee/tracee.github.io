@@ -1,0 +1,14 @@
+{%if page.see_also != empty %}
+<h4>See also</h4>
+<div class="hline"></div>
+<p>
+
+    {% for see_also in page.see_also %}
+    {% for p_hit in site.html_pages  %}
+    {%if see_also == p_hit.url %}
+    <a class="btn btn-theme" href="{{p_hit.url}}" role="button">{{ p_hit.title }}</a>
+    {%endif%}
+    {% endfor %}
+    {% endfor %}
+</p>
+{%endif%}
