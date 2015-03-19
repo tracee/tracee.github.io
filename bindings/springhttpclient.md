@@ -3,6 +3,7 @@ title: TracEE binding for Spring HTPP client
 category: bindings
 layout: binding
 menu_name: SpringHTTP
+order: 140
 ---
 
 > This module contains all necessary classes to transmit the MDC within your Spring `RestTemplate`-Request and extract the MDC from server response.

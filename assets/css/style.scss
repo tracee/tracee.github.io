@@ -458,6 +458,23 @@ a:focus {
     background-size: cover;
 }
 
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+/*ul ul, ol ul {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-left: 15px;
+}
+ol ol, ul ol {
+  list-style-type: lower-latin;
+  list-style-position: inside;
+  margin-left: 15px;
+}*/
+
+
 /* Blog Page */
 .popular-posts {
 	margin: 0;

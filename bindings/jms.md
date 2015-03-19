@@ -1,5 +1,5 @@
 ---
-title: TracEE bindings for JMS
+title: TracEE bindings for Java Message Service (JMS)
 category: bindings
 layout: binding
 menu_name: JMS

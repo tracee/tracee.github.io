@@ -3,6 +3,7 @@ title: TracEE binding for Apache CXF
 category: bindings
 layout: binding
 menu_name: CXF
+order: 155
 toc:
 
 ---

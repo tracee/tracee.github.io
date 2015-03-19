@@ -9,7 +9,7 @@
     <h4>More bindings</h4>
     <div class="hline"></div>
     <ul class="popular-posts">
-        {% assign binding_pages = (site.html_pages | where:"dir", "/bindings" | sort:"title" %}
+        {% assign binding_pages = (site.html_pages | where:"dir", "/bindings" | sort:"title" | sort:"order"  %}
         {% for ob in binding_pages %}
         {%if ob.url != page.url %}
         {% assign title = ob.title %}

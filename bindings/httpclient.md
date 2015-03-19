@@ -4,7 +4,7 @@ category: bindings
 layout: binding
 menu_name: HttpClient
 toc:
-
+order: 110
 ---
 
 TODO Wrapper for [Apache HttpClient 3](http://hc.apache.org/httpclient-3.x/)

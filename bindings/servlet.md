@@ -6,6 +6,7 @@ menu_name: Servlet
 toc:
     - Installation
     - Background
+order: 90
 ---
 
 > tracee-servlet contains Servlet-Listeners and -Filters that allows you to use TracEE Context Propagation with Java Servlets.

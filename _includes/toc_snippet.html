@@ -1,10 +1,10 @@
 {% if  page.toc != null && page.toc != empty %}
 <h4>Content</h4>
 <div class="hline"></div>
-<ul class="popular-posts">
+<ol class="toc">
     {% for entry in page.toc %}
     <li><a href="#{{ entry | slugify }}">{{ entry }}</a></li>
     {% endfor %}
-</ul>
+</ol>
 <div class="spacing"></div>
 {% endif %}

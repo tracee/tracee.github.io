@@ -31,7 +31,7 @@
                 {% assign menu_name = p.title %}
                 {% endif %}
                 {% assign subpageDirectory = (p.url | remove_first:'.html' | remove_first:'/' | prepend:'/') %}
-                {% assign subpages = site.html_pages | where:"dir", subpageDirectory %}
+                {% assign subpages = site.html_pages | where:"dir", subpageDirectory | sort:"order" %}
                 {% if subpages == empty %}
                 <li{% if p.url == page.url %} class="active"{% endif %}><a href="{{ p.url }}">{{ menu_name }} </a></li>
                 {% else %}
