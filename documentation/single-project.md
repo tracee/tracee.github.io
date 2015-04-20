@@ -1,6 +1,7 @@
 ---
-layout: module
+layout: docs
 title: Single Project
+category: docs
 ---
 
 ### YOUR PROJECT NAME
