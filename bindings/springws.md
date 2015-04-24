@@ -56,7 +56,7 @@ public MyApplicationConfig {
 }
 ```
 
-### Server Interceptor -- Extract context information from incoming requests
+### Server Interceptor – Extract context information from incoming requests
 
 With a XML based configuration you add the `TraceeEndpointInterceptor` to all your soap services by attaching it to the `sws:interceptors` xml node. 
 (Namespace: `http://www.springframework.org/schema/web-services`)
