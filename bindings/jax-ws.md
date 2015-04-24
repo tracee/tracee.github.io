@@ -11,7 +11,7 @@ menu_name: JAX-WS
 
 > This module can be used to add TracEE context propagation support to Java API for XML Web Services (JAX-WS) API for endpoints and webservice clients.
 
-Please add the following dependencies to enable TracEE JAX-WS support. For example in maven-style projects add to the pom.xml:
+Please add the following dependencies to enable TracEE JAX-WS support. For example in maven-style projects add to the `pom.xml`:
 
 ```xml
 <dependencies>
@@ -37,9 +37,8 @@ public class TraceeJaxWsTestService implements TraceeJaxWsTestWS {
     ...
 }
 ```
-
-
-Therefore you have to add the referenced `traceeHandlerChain.xml` file to your classpath (i.e. `/src/main/resources`). The file must have the following content:
+    
+**Therefore you have to add the referenced `traceeHandlerChain.xml` file to your classpath (i.e. `/src/main/resources`).** The file must have the following content:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
@@ -50,17 +49,17 @@ Therefore you have to add the referenced `traceeHandlerChain.xml` file to your c
         </javaee:handler>
     </javaee:handler-chain>
 </javaee:handler-chains>
-```
+```    
 
 ## Using client side handlers
-First you have to create the client stub classes for the webservice wsdl.
-Then you are able to bind the error context logger by using the services handler resolver mechanism:
+First you have to create the client stub classes for the webservice wsdl. 
+Then you are able to bind the `TraceeClientHandler` by using the  handler resolver:
 
 ```java
 final TraceeJaxWsTestService testWebservice = new TraceeJaxWsTestService(
     new URL("http://localhost:8080/yourTestService/webservices/YourTestService?wsdl"));
-testWebservice.setHandlerResolver(TraceeClientHandlerResolver.buildHandlerResolver().add(TraceeClientHandler.class).build());
-final YourTestWS ws = testWebservice.getPort(YourTestWS.class);
+testWebservice.setHandlerResolver(new TraceeClientHandlerResolver());
+final YourTestWS ws = testWebservice.getPort(YourTestWS.class);    
 ```
 
 ## Background
@@ -73,4 +72,4 @@ When the client sends a request to the server and he sends an response back, bot
     Client receives the response: ResponseIn
 
 In JAX-WS we can  use HandlerChains to intercept requests and responses at client and server side.
-Therefore TracEE offeres two kind of SOAPHandler: `TraceeServerHandler` and `TraceeClientHandler`.
+Therefore TracEE offeres two kind of SOAPHandler: TraceeServerHandler and TraceeClientHandler.
