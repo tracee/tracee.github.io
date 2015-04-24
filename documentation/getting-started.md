@@ -10,7 +10,7 @@ toc:
 
 > This article explains how you can easily integrate TracEE into your projects.
 
-## Step 1 : Provide Backend Provider
+## Step 1 : Select a Backend Provider
 
 TracEE uses the MDC ( _Mapped Diagnostic Context_ ) of your applications log framework to store the TPIC (= _TracEE Propagated Invocation Context_ ) information, like invocation and session ids.
 Most of the popular java logging frameworks like slf4j, log4j2, log4j and jboss-logging are supported by TracEE.
