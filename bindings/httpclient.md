@@ -25,7 +25,7 @@ Add the `tracee-httpclient` module to your `pom.xml` dependencies:
 </dependencies>
 ```
 
-Then simply replace the pure instantiation of the HttpClient in your code with:
+Then simply replace the pure instantiation of the HttpClient in your code 
 
 ```java
 final HttpClient client = new HttpClient();
