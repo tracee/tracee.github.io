@@ -4,7 +4,7 @@ category: bindings
 layout: binding
 menu_name: JAX-RS2
 toc:
-    - Container-Configuration: Implicit vs. application config
+    - "Container-Configuration: Implicit vs. application config"
     - Using JAX-RS 2 client
 ---
 
