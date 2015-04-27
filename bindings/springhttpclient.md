@@ -1,5 +1,5 @@
 ---
-title: TracEE binding for Spring HTPP client
+title: TracEE binding for Spring HTTP client
 category: bindings
 layout: binding
 menu_name: SpringHTTP
