@@ -30,6 +30,7 @@ Add `tracee-springmvc` to your application dependencies. That's all! - For examp
 Then you're able to use our `TraceeInterceptor` in two ways:
 
 With Spring JavaConfig:
+
 ```java
 @Configuration
 @EnableWebMvc
