@@ -4,6 +4,10 @@ category: bindings
 layout: binding
 menu_name: SpringWS
 order: 140
+toc:
+    - Client-Interceptor - Add context information to outgoing requests
+    - Server Interceptor - Extract context information from incoming requests
+    
 ---
 
 > This binding module handles outgoing and incoming SOAP-Requests handled by [Spring WS / Spring Web Services](http://projects.spring.io/spring-ws/). 
