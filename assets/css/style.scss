@@ -64,7 +64,9 @@ Tracee.io hacks
 **/
 
 table {
-	@extend .table
+	@extend .table;
+	@extend .table-bordered;
+	@extend .table-striped;
 }
 
 code {
