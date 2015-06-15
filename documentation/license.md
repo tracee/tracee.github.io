@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: TracEE project is released under the revised BSD License.
+menu_name: Project License
 category: docs
 order: 100
 ---
