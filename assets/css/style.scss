@@ -36,6 +36,9 @@ $primary-color: #00b3fe;
 $secondary-color: #384452;
 $background-color: #fff;
 $font-on-secondary: #bfc9d3;
+
+
+
 /*	################################################################
 
 	Author: Carlos Alvarez
@@ -48,8 +51,22 @@ $font-on-secondary: #bfc9d3;
 ################################################################# */
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,900);
-@import url("prettyPhoto.css") screen;
-@import url("hoverex-all.css") screen;
+@import 'prettyPhoto.css' screen;
+@import 'hoverex-all.css';
+@import 'bootstrap';
+@import 'highlight/github.css';
+
+
+
+/** ########################################################
+
+Tracee.io hacks
+**/
+
+table {
+	@extend .table
+}
+
 
 /*	################################################################
 	1. GENERAL STRUCTURES
