@@ -38,7 +38,7 @@ order: 10
                 {%unless repo.full_name == "tracee/tracee.github.io" %}
                 <a href="{{ repo.html_url }}"><h3 class="ctitle">{{ repo.full_name }}</h3></a>
                 <p>{{ repo.description }}</p>
-                <p><a href="{{ repo.html_url }}/releases">[releases]</a></p>
+                <p><a href="{{ repo.html_url }}/releases" class="btn btn-theme">releases of project</a></p>
                 <div class="hline"></div>
                 <div class="spacing"></div>
                 {%endunless%}
