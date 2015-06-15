@@ -10,7 +10,7 @@ order: 10
 
 > This article explains how you can easily integrate TracEE into your projects.
 
-The TracEE framework is used to create and pass the TPIC (= _TracEE Propagated Invocation Context_ ) information - which for example consists of invocation and session ids - throughout your applications system environment. 
+The TracEE framework is used to create and pass the _TracEE Propagated Invocation Context_ (short: __TPIC__) information - which for example consists of invocation and session ids - throughout your applications system environment. 
 
 TracEE uses the MDC ( _Mapped Diagnostic Context_ ) of your applications underlying log framework to store the TPIC during the invocation processing in your components. It supports most of the popular java logging frameworks like slf4j, log4j2, log4j and jboss-logging.
 
