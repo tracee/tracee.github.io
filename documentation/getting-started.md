@@ -5,7 +5,7 @@ category: docs
 toc:
     - Provide Backend Provider
     - Provide Bindings
-
+order: 10
 ---
 
 > This article explains how you can easily integrate TracEE into your projects.
