@@ -4,6 +4,10 @@ title: Binding Configuration
 menu_name: Binding Configuration
 category: docs
 order: 40
+toc:
+    - Filtering propagated context
+    - Configurable Values
+    - Generate identifier for the context
 ---
 
 # Configuration
