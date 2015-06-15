@@ -70,4 +70,4 @@ Please take a look at the bindings tab for further information about how to inte
 
 ## Overview about all maven artefacts
 <!--- todo: find a way to determine last project version -->
-You could find all current available and supported tracee modules in the [maven central](http://search.maven.org/#search|ga|1|g%3Aio.tracee.**%20AND%20v%3A%220.11.0%22%20AND%20%28p%3A%22bundle%22%20OR%20p%3A%22jar%22%29).
+You can find all tracee modules and their recent version in the [maven central repository](http://search.maven.org/#search|ga|1|g%3Aio.tracee.**%20AND%20v%3A%220.11.0%22%20AND%20%28p%3A%22bundle%22%20OR%20p%3A%22jar%22%29).
