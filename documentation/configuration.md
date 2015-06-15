@@ -10,9 +10,9 @@ order: 40
 
 Currently there are only two aspects you're able to configure when you're using TracEE:
 * Permitted keys in the propagated invocation context
-* Length of the generated invocation- and sessionId
+* Length of the generated invocation-Id and `sessionId`
 
-# Filtering propagated context
+## Filtering propagated context
 
 If not configured otherwise, all TracEE connector modules gracefully accept incoming contexts,
 pass them down to sub-invocations and post the resulting contexts back to the caller.
