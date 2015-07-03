@@ -1,9 +1,8 @@
 ---
 layout: docs
+menu_name: Why TracEE?
 title: Why TracEE?
-category: docs
-
-order: 5
+order: 2
 ---
 
 In production, logs are still the most reliable source of information which can be used to analyze your applications behavior.
