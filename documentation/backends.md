@@ -1,7 +1,7 @@
 ---
 title: TracEE backend for SLF4J / Logback
-category: backends
-layout: backend
+category: docs
+layout: docs
 menu_name: SLF4J
 toc:
 order: 10
@@ -11,20 +11,8 @@ order: 10
 
 ## Installation
 
-You need exactly one backend provider on your runtime classpath. Add following to your `pom.xml` to add this module to your dependency tree:
+`TODO: ALREADY IN CORE!!!`
 
-```xml
-<dependencies>
-...
-	<dependency>
-		<groupId>io.tracee.backend</groupId>
-		<artifactId>tracee-slf4j</artifactId>
-		<version>RELEASE</version> <!-- You should specify a version instead -->
-		<scope>runtime</scope>
-	</dependency>
-...
-</dependencies>
-```
 
 ## Thread Local Backend
 

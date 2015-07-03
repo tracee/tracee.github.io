@@ -2,7 +2,7 @@
 layout: docs
 title: Binding Configuration
 menu_name: Binding Configuration
-category: binding
+category: docs
 order: 40
 toc:
     - Filtering propagated context
