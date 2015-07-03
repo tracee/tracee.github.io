@@ -13,10 +13,32 @@ Log servers like Graylog or the ELK stack are helping you to manage your logs to
 
 But there's one thing that the log servers can't help you with - they can't aggregate the log information that belongs together on their own. 
 
+```ini
+2014-02-11 15:35:04.127 [tomcat-exec-1] INFO
+  my.business.webapp.Servlet - Calling the backend for user Alice now!
+2014-02-11 15:35:04.128 [tomcat-exec-2] INFO
+  my.business.webapp.Servlet - Calling the backend for user Bob now!
+2014-02-11 15:35:05.999 [jboss-exec-15] INFO
+  my.business.backend.Service - Everything went fine!
+2014-02-11 15:35:05.999 [jboss-exec-21] WARN
+  my.business.backend.Service - Something went terribly wrong!
+```
+
 This is where TracEE kicks in. It offers bindings for most popular Java frameworks, that will automatically generate tracking information like invocation or session ID's and writes them to your applications log framework contexts.
 Another thing TracEE does is to support passing those invocation and session id between all of your components in your application environment, empowering you to gather all log statements that belong to a single invocation or session.
 
 If you are using TracEE, time needed for analyzing your systems behavior - for example in case of an error -  will be drastically reduced. 
+
+```ini
+2014-02-11 15:35:04.127 [rxId:BABO sessionId:AFF3] [tomcat-exec-1] INFO
+  my.business.webapp.Servlet - Calling the backend for user Alice now!
+2014-02-11 15:35:04.128 [rxId:BABA sessionId:EEEE] [tomcat-exec-2] INFO
+  my.business.webapp.Servlet - Calling the backend for user Bob now!
+2014-02-11 15:35:05.999 [rxId:BABA sessionId:EEEE] [jboss-exec-15] INFO
+  my.business.backend.Service - Everything went fine!
+2014-02-11 15:35:05.999 [rxId:BABO sessionId:AFF3] [jboss-exec-21] WARN
+  my.business.backend.Service - Something went terribly wrong!
+```
 
 Integration of TracEE in your application is very easy and done with almost no effort. 
 
