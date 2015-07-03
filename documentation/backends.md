@@ -2,7 +2,7 @@
 title: TracEE backend for SLF4J / Logback
 category: docs
 layout: docs
-menu_name: SLF4J
+menu_name: Backends
 toc:
 order: 10
 ---
