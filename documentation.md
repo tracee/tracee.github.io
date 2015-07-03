@@ -1,6 +1,6 @@
 ---
 title: Documentation
 menu_name: Docs
-order: 30
+order: 10
 toc:
 ---
