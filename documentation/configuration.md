@@ -50,8 +50,8 @@ Just create a file with the name `META-INF/tracee.properties` in your applicatio
 
 Loading order:
 
-* TracEE first scans for __all__ `META-INF/tracee.default.properties` files _in undefined order_ on the classpath and combines them to a _default_-properties object.
-* Then TracEE scans for __all__ `META-INF/tracee.properties` files _in undefined order_ on the classpath and combines them to an _application_-properties object.
+* At first TracEE scans for __all__ `META-INF/tracee.default.properties` files on the classpath _in undefined order_ and combines them to a _default_-properties object.
+* Then TracEE scans for __all__ `META-INF/tracee.properties` files on the classpath _in undefined order_ and combines them to an _application_-properties object.
 * The order between each default or non-default properties files ist not defined.
 
 Evaluation strategy:
