@@ -5,7 +5,7 @@ menu_name: Project License
 category: docs
 order: 100
 ---
-Copyright (c) 2013, holisticon AG
+Copyright (c) 2013, Holisticon AG
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
