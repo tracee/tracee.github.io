@@ -12,22 +12,23 @@ toc:
 
 # Configuration
 
-Currently there are only two aspects you're able to configure when you're using TracEE:
+Currently there are two aspects you are able to configure when using TracEE:
 
-* Permitted keys in the propagated invocation context
-* Length of the generated invocation-Id and `sessionId`
+* Desired keys within the propagated invocation context
+* Length of the generated `invocationId` and `sessionId`
 
 ## Filtering propagated context
 
 If not configured otherwise, all TracEE connector modules gracefully accept incoming contexts,
-pass them down to sub-invocations and post the resulting contexts back to the caller.
-This behaviour is not always desirable, especially if the context may contain sensitive information.
+subsequently pass them down to sub-invocations and eventually post the resulting contexts back to the caller.
+
+This behaviour may not always be desirable, especially when a context contains potentially sensitive information.
 
 This is where TracEE configuration kicks in. It allows you to configure each connector with its own accepting-
 and passing-policy. These policies are called __profiles__. TracEE ships with a small set of standard profiles. They
 are encoded within java property files.
 
-The preconfigured profiles are shipped with the `tracee-core`.
+These preconfigured profiles are shipped with the `tracee-core`.
 
 You may create new profiles within your application or overwrite values from the tracee.default.properties file.
 Just create a file with the name `META-INF/tracee.properties` in your application resource directory.

@@ -65,7 +65,7 @@ TracEE offers technology related binding artifacts which handle the generation o
 
 At the moment TracEE provides bindings for a lot of popular Java (EE) frameworks like Servlets, JAX-WS, JAX-RS, JMS, Spring, Apache CXF.
 
-Integration of TracEE binding artifacts highly depend on their related frameworks, therefore there's no common way for integrating those bindings into applications.
+Integration of TracEE binding artifacts highly depend on their related frameworks, therefore there is no common way for integrating those bindings into applications.
 Please take a look at the bindings tab for further information about how to integrate TracEE bindings for specific frameworks.
 
 ## Overview about all maven artefacts
