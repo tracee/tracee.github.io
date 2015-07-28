@@ -5,6 +5,7 @@ layout: docs
 menu_name: Backends
 toc:
 order: 10
+published: false
 ---
 
 > Backend implementation for [slf4j (1.6.6+)](http://www.slf4j.org/)
