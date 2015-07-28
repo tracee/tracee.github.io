@@ -8,9 +8,9 @@ order: 2
 In production, logs are still the most reliable source of information which can be used to analyze your application's behavior.
 In times of microservices and service oriented architecture analyzing of logs is getting more and more complex.
 
-Log servers like Graylog or the ELK stack are helping you to manage your logs to search the log files for interesting information by offering a simple user interface.
+Log servers like Graylog or the Elasticsearch, Logstash, Kibana (ELK) stack help you to manage your logs and search the log files for interesting information by offering a simple unified user interface.
 
-But there is one thing that the log servers can't help you with - they can't aggregate the log information that belongs together on their own. 
+But there is one thing that the log servers can't help you with - they can't aggregate the log information that belong together on their own.
 
 ```ini
 2014-02-11 15:35:04.127 [tomcat-exec-1] INFO
@@ -23,10 +23,11 @@ But there is one thing that the log servers can't help you with - they can't agg
   my.business.backend.Service - Something went terribly wrong!
 ```
 
-This is where TracEE kicks in. It offers bindings for most popular Java frameworks, that will automatically generate tracking information like invocation or session ids and writes it to your applications log framework contexts.
-Another thing TracEE does is to support passing those invocation and session ids between all of your components in your application environment, empowering you to gather all log statements that belong to a single invocation or session.
+This is where TracEE kicks in. It offers bindings for most popular Java frameworks, that will automatically generate tracking information like invocation or session ids and writes it to your applications log framework contexts. The idea is pretty similar to correlation ids that you manually put into your application APIs to make sense of system interactions - but TracEE solves this for you - automatic and transparent!
 
-If you are using TracEE, time needed for analyzing your systems behavior - for example in case of an error -  will be drastically reduced. 
+Another thing TracEE does is to support passing those ids between all of your components in your application environment, empowering you to gather all log statements that belong to a single invocation, session or other kind of correlation.
+
+Thus using TracEE drastically reduces the time needed for analyzing your systems behavior - for instance in case of an error. 
 
 ```ini
 2014-02-11 15:35:04.127 [rxId:BABO sessionId:AFF3] [tomcat-exec-1] INFO
@@ -39,7 +40,7 @@ If you are using TracEE, time needed for analyzing your systems behavior - for e
   my.business.backend.Service - Something went terribly wrong!
 ```
 
-Integration of TracEE in your application is very easy and done with almost no effort. 
+The integration of TracEE into your application is very easy and doable with almost no effort but adding the TracEE dependencies.
 
-Please check the <a href="/documentation/getting-started.html">Getting Started</a>, <a href="/backends/slf4j.html">Backend</a> and <a href="http://localhost:4000/bindings/servlet.html">Binding</a> sections for further details about integration TracEE into your application. 
+Read the [Getting Started](/documentation/getting-started.html) and [Bindings](http://localhost:4000/bindings/servlet.html) sections for further details about integrating TracEE into your application.
 
