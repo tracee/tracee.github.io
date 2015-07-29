@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /assets/
+
+Sitemap: http://www.tracee.io/sitemap.xml
