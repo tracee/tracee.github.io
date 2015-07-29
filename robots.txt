@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /assets/
+Disallow: *
 
 Sitemap: http://www.tracee.io/sitemap.xml
