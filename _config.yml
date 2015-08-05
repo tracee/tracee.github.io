@@ -12,7 +12,7 @@ gems:
   - jekyll-redirect-from
   - jekyll-sitemap
 name: TracEE
-url: http://tracee.io
+url: http://www.tracee.io
 
 sass:
     sass_dir: assets/css
