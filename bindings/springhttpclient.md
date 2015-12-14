@@ -37,3 +37,25 @@ restTemplate.setInterceptors(Arrays.<ClientHttpRequestInterceptor>asList(new Tra
 restTemplate.getForObject(serverEndpoint, ...);
 ...
 ```
+
+This can also be achieved using spring xml configuration. The following `context.xml` demonstrates how to integrate the binding via spring xml configuration.
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="traceeHttpClientInterceptor" class="io.tracee.binding.springhttpclient.TraceeClientHttpRequestInterceptor"/>
+
+	<bean id="myRestTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="interceptors">
+			<list merge="true">
+				<ref bean="traceeHttpClientInterceptor"/>
+			</list>
+		</property>
+	</bean>
+
+</beans>
+
+```
