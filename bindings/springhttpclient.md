@@ -14,7 +14,7 @@ Requires Spring-Web in version 3.1 or above.
 
 ## Installation
 
-If you're already use `RestTemplate` for your REST remote calls I'm pretty sure that you've added a dependency to `spring-web`. To use TracEE you need the `tracee-springhttpclient` dependency as well.
+If you use `RestTemplate` for your REST remote calls it's pretty clear that you've already added a dependency to `spring-web`. To use TracEE you need the `tracee-springhttpclient` dependency as well.
 
 For maven you've to add following dependency to your `pom.xml`:
 
