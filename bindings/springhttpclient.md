@@ -19,23 +19,22 @@ If you use `RestTemplate` for your REST remote calls it's pretty clear that you'
 For maven you've to add following dependency to your `pom.xml`:
 
 ```xml
-...
+…
 <dependency>
 	<groupId>io.tracee.binding</groupId>
     <artifactId>tracee-springhttpclient</artifactId>
     <version>RELEASE</version> <!-- You should specify a version instead -->
 </dependency>
-...
+…
 ```
 
 After that you've to add the `TraceeClientHttpRequestInterceptor` to your `RestTemplate`:
 
 ```java
-...
 final RestTemplate restTemplate = new RestTemplate();
-restTemplate.setInterceptors(Arrays.<ClientHttpRequestInterceptor>asList(new TraceeClientHttpRequestInterceptor()));
+restTemplate.setInterceptors(Arrays.<ClientHttpRequestInterceptor>asList(
+    new TraceeClientHttpRequestInterceptor()));
 restTemplate.getForObject(serverEndpoint, ...);
-...
 ```
 
 This can also be achieved using spring xml configuration. The following `context.xml` demonstrates how to integrate the binding via spring xml configuration.
@@ -46,7 +45,8 @@ This can also be achieved using spring xml configuration. The following `context
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="traceeHttpClientInterceptor" class="io.tracee.binding.springhttpclient.TraceeClientHttpRequestInterceptor"/>
+	<bean id="traceeHttpClientInterceptor"
+	    class="io.tracee.binding.springhttpclient.TraceeClientHttpRequestInterceptor"/>
 
 	<bean id="myRestTemplate" class="org.springframework.web.client.RestTemplate">
 		<property name="interceptors">

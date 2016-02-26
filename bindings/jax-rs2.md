@@ -4,7 +4,7 @@ category: bindings
 layout: binding
 menu_name: JAX-RS2
 toc:
-    - "Container-Configuration: Implicit vs. application config"
+    - "Container-Configuration"
     - Using JAX-RS 2 client
 ---
 
@@ -14,20 +14,24 @@ Please add the following dependency to enable TracEE JAX-RS 2.x ([JSR 339](http:
 
 ```xml
 <dependencies>
-    ...
+<!-- … -->
     <dependency>
         <groupId>io.tracee.binding</groupId>
         <artifactId>tracee-jaxrs2</artifactId>
         <version>RELEASE</version> <!-- You should specify a version instead -->
     </dependency>
-    ...
+<!-- … -->
 </dependencies>
 ```
 
-## Container-Configuration: Implicit vs. application config
+## Container-Configuration
+
+### Implicit
 
 If you don't use an explicit application config and have the `tracee-jaxrs2` module on your classpath, 
 all filters will be automatically applied to your JAX-RS services.
+
+### Explicit Application configuration
 
 If you use an explicit `Application` class, you need to add `TraceeContainerFilter` as provider classes.
 
@@ -38,7 +42,8 @@ Example:
 public class ApplicationConfig extends Application {
 
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList(io.tracee.binding.jaxrs2.TraceeContainerFilter.class, ...);
+        return new HashSet<Class<?>>(Arrays.asList(
+        io.tracee.binding.jaxrs2.TraceeContainerFilter.class, …);
     }
 }
 ```

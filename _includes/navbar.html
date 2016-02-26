@@ -12,6 +12,7 @@
         </div>
         <div class="navbar-collapse collapse navbar-right">
 
+            {% comment %}
             <!--
             <ul class="nav navbar-nav">
                 {% for node in site.html_pages %}
@@ -21,9 +22,12 @@
                 <li><a href='{{node.url}}'>{{node.url}}</a></li>
                 {% endfor %}
             </ul>-->
+            {% endcomment %}
 
             {% assign pages_by_dir = (site.html_pages | group_by:"dir" %}
             {% assign rootpages = (site.html_pages | where:"dir", "/" | sort:"order" ) %}
+
+
             <ul class="nav navbar-nav">
             {% for p in rootpages %}
                 {% assign menu_name = p.menu_name %}
@@ -32,7 +36,7 @@
                 {% endif %}
                 {% assign subpageDirectory = (p.url | remove_first:'.html' | remove_first:'/' | prepend:'/') %}
                 {% assign subpages = site.html_pages | where:"dir", subpageDirectory | sort:"order" %}
-                {% if subpages == empty %}
+                {% if p.isSection != true or subpages == empty %}
                 <li{% if p.url == page.url %} class="active"{% endif %}><a href="{{ p.url }}">{{ menu_name }} </a></li>
                 {% else %}
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ menu_name }}<b class="caret"></b></a>
@@ -50,7 +54,7 @@
             {% endfor %}
             </ul>
 
-
+            {% comment %}
             <!--
             <ul class="nav navbar-nav">
                 <li {% if page.url == "/hidden/index.html" %} class="active" {% endif %}><a href="/hidden/index.html">HOME</a></li>
@@ -73,6 +77,8 @@
                 <li><a href="https://github.com/tracee/tracee">C<i class="fa fa-github"></i>DE</a></li>
             </ul>
             -->
+            {% endcomment %}
+
         </div><!--/.nav-collapse -->
     </div>
 </div>

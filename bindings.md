@@ -1,5 +1,7 @@
 ---
 title: Bindings
-toc:
+isSection: true
+menu_name: Bindings
 order: 50
+toc:
 ---

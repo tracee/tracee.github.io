@@ -5,7 +5,8 @@ layout: binding
 menu_name: CXF
 order: 155
 toc:
-
+    - "Installation"
+    - Background
 ---
 
 > This module is used for CXF implementations on client and/or on server side. It's tested with CXF 2.7.13 and should work with all versions above.

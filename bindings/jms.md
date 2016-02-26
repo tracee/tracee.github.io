@@ -27,6 +27,7 @@ Please add the following dependencies to enable TracEE's JMS support. For exampl
 ```
 
 ## Using MessageProducer
+
 You can use the TracEE context propagation for JMS by wrapping the MessageProducer with TraceeMessageWriter.wrap(messageProdecer).
 
 ```java
@@ -97,9 +98,11 @@ import javax.jms.MessageListener;
 
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(
-				propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
+				propertyName = "destinationType",
+				propertyValue = "javax.jms.Queue"),
 		@ActivationConfigProperty(
-				propertyName = "destination", propertyValue = "exampleQueue")})
+				propertyName = "destination",
+				propertyValue = "exampleQueue")})
 @Interceptors({TraceeMessageListener.class})
 public class MessageQueueListener implements MessageListener {
 
