@@ -44,5 +44,5 @@ Thus using TracEE drastically reduces the time needed for analyzing your systems
 
 The integration of TracEE into your application is very easy and doable with almost no effort but adding the TracEE dependencies.
 
-Read the [Getting Started](/documentation/getting-started.html) and [Bindings](http://localhost:4000/bindings/overview.html) sections for further details about integrating TracEE into your application.
+Read the [Getting Started](/documentation/getting-started.html) and [Bindings](/bindings/overview.html) sections for further details about integrating TracEE into your application.
 
