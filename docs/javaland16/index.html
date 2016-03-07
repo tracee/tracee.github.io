@@ -45,393 +45,395 @@
     <div class="slides">
         <section data-markdown  data-separator="^\n---\n$" data-separator-vertical="^\n--\n$" data-separator-notes="^>NOTES:"><script type="text/template"># Guard your Logs from Microservice Madness
 
-        JavaLand 2016
+JavaLand 2016
 
-        [<i class="fa fa-twitter" style="color:#1da1f2"></i> @dwegener](https://twitter.com/dwegener) | [tobias.stamann@holisticon.de](tobias.stamann@holisticon.de)<br />
+[<i class="fa fa-twitter" style="color:#1da1f2"></i> @dwegener](https://twitter.com/dwegener) | [tobias.stamann@holisticon.de](tobias.stamann@holisticon.de)<br />
 
-        <!-- .slide: class="title" data-background="images/brand/grass_footer.png" data-background-repeat="repeat-x" data-background-position="bottom center" data-background-size="inherit" -->
+<!-- .slide: class="title" data-background="images/brand/grass_footer.png" data-background-repeat="repeat-x" data-background-position="bottom center" data-background-size="inherit" -->
 
-        ---
+---
 
-        # Why do we log?
+# Why do we log?
 
-        - Logs tell us __what__ happened in a system
-        - Help to understand what our system does <br>(and what's possibly going wrong)
-        - Reveal unexpected behaviour
+- Logs tell us __what__ happened in a system
+- Help to understand what our system does <br>(and what's possibly going wrong)
+- Reveal unexpected behaviour
 
-        ---
+---
 
-        # Who reads the log?
+# Who reads the log?
 
-        - Developers
-        - Debugging at runtime, tuning, maintenance
-        - Operations
-        - Alerting on Errors and Warnings, post-mortems
+- Developers
+    - Debugging at runtime, tuning, maintenance
+- Operations
+    - Alerting on Errors and Warnings, post-mortems
 
-        ---
+---
 
-        # How to log?
+# How to log?
 
-        ```no-highlight
-        System.err.println("WTF is that: " + businessDao.toString())
-        ```
+```no-highlight
+System.err.println("WTF is that: " + businessDao.toString())
+```
 
-        ```no-highlight
-        "WTF is that: FooDao@159C8EA5"
-        ```
+```no-highlight
+"WTF is that: FooDao@159C8EA5"
+```
 
-        ---
+---
 
-        # Log Frameworks!
+# Log Frameworks!
 
-        - Provides context of _where_ and _when_ something happened
-        - Time, Thread, Class, Stacktraces
-        - Filtering
-        - Configurable log-levels
-        - Routing
-        - Different sinks for different events
+- Provides context of _where_ and _when_ something happened
+  - Time, Thread, Class, Stacktraces
+- Filtering
+  - Configurable log-levels
+- Routing
+  - Different sinks for different events
 
-        ---
+---
 
-        # Log Frameworks!
+# Log Frameworks!
 
-        ```no-highlight
-        LOGGER.error("Something bad happened", exception);
-        ```
+```no-highlight
+LOGGER.error("Something bad happened", exception);
+```
 
-        ```no-highlight
-        16:56:35.671 [main] ERROR m.c.p.MyClass - Something bad happened ⤦
-        [java.lang.IllegalArgumentException] with root cause
+```no-highlight
+16:56:35.671 [main] ERROR m.c.p.MyClass - Something bad happened ⤦
+    [java.lang.IllegalArgumentException] with root cause
         java.lang.IllegalArgumentException: null
 
-        ```
+```
 
-        ---
+---
 
-        # Popular logging frameworks
+# Popular logging frameworks
 
-        ![img](images/Java-logging-api.png) <!-- .element: style="max-height:80px; display:inline" -->
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        ![img](images/log4j-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
+![img](images/Java-logging-api.png) <!-- .element: style="max-height:80px; display:inline" -->
+&nbsp;&nbsp;&nbsp;&nbsp;
+![img](images/log4j-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
 
-        ![img](images/slf4j-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        ![img](images/lockback-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
+![img](images/slf4j-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![img](images/lockback-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
 
-        ![img](images/log4j2-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
+![img](images/log4j2-logo.jpg) <!-- .element: style="max-height:80px; display:inline" -->
 
-        ---
+---
 
-        # So what's the problem?
+# So what's the problem?
 
-        ---
+---
 
-        ## The simple case
+## The simple case
 
-        ![img](images/services_simple.svg)<!-- .element style="min-width:700px" -->
+![img](images/services_simple.svg)<!-- .element style="min-width:700px" -->
 
-        ---
+---
 
-        ## The simple case
+## The simple case
 
-        ```no-highlight
-        [awesome-app.log]
-        16:56:10 [main] INFO  User 'alice' logs in.
-        16:58:20 [main] INFO  Creating order.
-        16:58:20 [main] WARN  Transaction 'tx388ff00' failed, retrying.
-        16:58:22 [main] ERROR Transaction failed after retry: SocketClosedException
-        java.lang.SocketClosedException: mean-database.local:443
+```no-highlight
+[awesome-app.log]
+16:56:10 [main] INFO  User 'alice' logs in.
+16:58:20 [main] INFO  Creating order.
+16:58:20 [main] WARN  Transaction 'tx388ff00' failed, retrying.
+16:58:22 [main] ERROR Transaction failed after retry: SocketClosedException
+    java.lang.SocketClosedException: mean-database.local:443
         at m.c.p.FooService.doPersist(FooService.java:42)
-        16:58:23 [main] INFO  Notified caller that the order failed.
+16:58:23 [main] INFO  Notified caller that the order failed.
         ...
-        ```
+```
 
-        ---
+---
 
-        ## Enter concurrency
+## Enter concurrency
 
-        ![img](images/services_musers.svg)<!-- .element style="min-width:900px" -->
-
-
-        ---
-
-        ## Enter concurrency
+![img](images/services_musers.svg)<!-- .element style="min-width:900px" -->
 
 
-        ```no-highlight
-        [awesome-app.log]
-        16:56:10 [worker-1] INFO  User 'alice' logs in.
-        16:56:10 [worker-2] INFO  User 'bob' logs in.
-        16:58:20 [worker-2] INFO  Creating order.
-        16:58:20 [worker-1] INFO  Creating order.
-        16:58:20 [worker-2] ERROR Transaction 'tx388ff00' failed.
-        16:58:20 [worker-1] INFO  Create order successful!
-        16:58:20 [worker-1] INFO  User 'charlie' logs in.
+---
+
+## Enter concurrency
+
+
+```no-highlight
+[awesome-app.log]
+16:56:10 [worker-1] INFO  User 'alice' logs in.
+16:56:10 [worker-2] INFO  User 'bob' logs in.
+16:58:20 [worker-2] INFO  Creating order.
+16:58:20 [worker-1] INFO  Creating order.
+16:58:20 [worker-2] ERROR Transaction 'tx388ff00' failed.
+16:58:20 [worker-1] INFO  Create order successful!
+16:58:20 [worker-1] INFO  User 'charlie' logs in.
         ...
-        ```
+```
 
-        Which user will send us an angry e-mail?
+Which user won't receive his order?
 
-        ---
+---
 
-        ## Enter distribution
+## Enter distribution
 
-        ![img](images/services_soa.svg)<!-- .element style="min-width:900px" -->
+![img](images/services_soa.svg)<!-- .element style="min-width:900px" -->
 
-        ---
+---
 
-        ## Enter distribution
+## Enter distribution
 
-        ![img](images/services_micro.svg)<!-- .element style="min-width:900px" -->
+![img](images/services_micro.svg)<!-- .element style="min-width:900px" -->
 
-        ---
+---
 
-        ## Enter distribution
+## Enter distribution
 
-        ```no-highlight
-        [10.0.128.1/ui.log]
-        16:56:10 [worker-01] INFO  User 'alice' logs in.
-        16:56:50 [worker-05] INFO  User 'bob' logs in.
-        ```
+```no-highlight
+[10.0.128.1/ui.log]
+16:56:10 [worker-01] INFO  User 'alice' logs in.
+16:56:50 [worker-05] INFO  User 'bob' logs in.
+```
 
-        ```no-highlight
-        [10.0.128.2/orders.log]
-        16:57:10 [worker-50] INFO  Creating order.
-        ```
+```no-highlight
+[10.0.128.2/orders.log]
+16:57:10 [worker-50] INFO  Creating order.
+```
 
-        ```no-highlight
-        [10.0.128.3/products.log]
-        16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
-        ```
+```no-highlight
+[10.0.128.3/products.log]
+16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
+```
 
-        Which user created the order?
+⃨
 
-        ---
+---
 
-        ## Log Aggregation
+## Log Aggregation
 
-        - Aggregate distributed log files into a single index
-        - Tools
-        - Elasticsearch / Logstash / Kibana (ELK)
-        - Splunk
-        - ...
+- Aggregate distributed log files into a single index
+- Tools
+    - Elasticsearch / Logstash / Kibana (ELK)
+    - Splunk
+    - graylog
 
-        ---
+---
 
-        ## Log Aggregation - Kibana
+## Log Aggregation - Kibana
 
-        ![img](images/kibana.png)
+![img](images/kibana.png)
 
-        ---
+---
 
-        ## Log Aggregation
+## Log Aggregation
 
-        ```no-highlight
-        [10.0.128.1/ui.log]       16:56:10 [worker-01] INFO  User 'alice' logs in.
-        [10.0.128.1/ui.log]       16:56:50 [worker-05] INFO  User 'bob' logs in.
-        [10.0.128.2/orders.log]   16:57:10 [worker-50] INFO  Creating order.
-        [10.0.128.3/products.log] 16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
-        ```
+```no-highlight
+[10.0.128.1/ui.log]       16:56:10 [worker-01] INFO  User 'alice' logs in.
+[10.0.128.1/ui.log]       16:56:50 [worker-05] INFO  User 'bob' logs in.
+[10.0.128.2/orders.log]   16:57:10 [worker-50] INFO  Creating order.
+[10.0.128.3/products.log] 16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
+```
 
-        ... and which user created the order?
+---
 
-        ---
+## Tracing the system interaction
 
+- What if we would invent our own _thread-id_ that:
+  - survives thread boundaries
+  - survives IO boundaries
+- Let's call it __invocation-id__
+- ... and put it into the Mapped Diagnostic Context (MDC)
 
-        ## Mapped Diagnostic Context (MDC)
+---
 
-        - Thread-local map that is accessible for the logging configuration
-        - Must be managed (cleaned) manually
+## Mapped Diagnostic Context (MDC)
 
-        ```java
-        class MDC {
-        static void put(String key, String value);
-        static String get(String key);
-        static void remove(String key);
-        static void clear();
-        }
-        ```
+- Thread-local map that is accessible for the logging configuration
+- Must be managed (cleaned) manually
 
-        ```xml
-        [logback.xml:PatternLayout]
-        <pattern>%d{HH:mm:ss} [%thread] [%X{key}] %-5level %logger{36} %msg</pattern>
-        ```
+```java
+class MDC {
+    static void put(String key, String value);
+    static String get(String key);
+    static void remove(String key);
+    static void clear();
+}
+```
 
-        ---
+```xml
+[logback.xml:PatternLayout]
+<pattern>%d{HH:mm:ss} [%thread] [%X{key}] %-5level %logger{36} %msg</pattern>
+```
 
-        ## Tracing the system interaction
+---
 
-        - What if we would invent our own _thread-id_ that:
-        - survives thread boundaries
-        - survives IO boundaries
-        - Let's call it __invocation-id__
-        - ... and put it into the Mapped Diagnostic Context (MDC)
+## Tracing the system interaction
 
-        ---
-
-        ## Tracing the system interaction
-
-        ```java
-        class OrderService {
-        void doOrder(Customer c, Basket b, String invocationId) {
+```java
+class OrderService {
+    void doOrder(Customer c, Basket b, String invocationId) {
         try {
-        if(invocationId == null) { invocationId = generateId(); }
-        MDC.put("invocationId", invocationId);
-        LOG.info("Creating order.");
-        // IO boundary ahead!
-        remoteProductsService.checkStock(b,
-        MDC.get("invocationId"));
-        // ...
+            MDC.put("invocationId", invocationId);
+            LOG.info("Creating order.");
+            // IO boundary ahead!
+            remoteProductsService.checkStock(b,
+                                    MDC.get("invocationId"));
+            // ...
 
         } finally { MDC.remove("invocationId"); }
-        }
-        }
-        ```
+    }
+}
+```
 
-        ---
+---
 
-        ## Tracing the system interaction
+## Tracing the system interaction
 
-        ```no-highlight
-        [10.0.128.1/ui.log]       16:56:10 [worker-01] [ab827acffe] INFO  User 'alice' logs in.
-        [10.0.128.1/ui.log]       16:56:50 [worker-05] [fe287abb8s] INFO  User 'bob' logs in.
-        [10.0.128.2/orders.log]   16:57:10 [worker-50] [ab827acffe] INFO  Creating order.
-        [10.0.128.3/products.log] 16:57:09 [worker-02] [ab827acffe] INFO  Fetched catalog 'b2'.
-        ```
+```no-highlight
+[10.0.128.1/ui.log]       16:56:10 [worker-01] [ab827acffe] INFO  User 'alice' logs in.
+[10.0.128.1/ui.log]       16:56:50 [worker-05] [fe287abb8s] INFO  User 'bob' logs in.
+[10.0.128.2/orders.log]   16:57:10 [worker-50] [ab827acffe] INFO  Creating order.
+[10.0.128.3/products.log] 16:57:09 [worker-02] [ab827acffe] INFO  Fetched catalog 'b2'.
+```
 
-        ---
+---
 
-        # TracEE
+# TracEE
 
-        __A library for invocation context propagation <br>in distributed Java application logs__
+__A library for invocation context propagation <br>in distributed Java application logs__
 
-        - Inception in 2013
-        - License: Revised BSD (3-Clause)
+- Inception in 2013
+- License: Revised BSD (3-Clause)
 
-        [tracee.io](http://tracee.io/)
+[tracee.io](http://tracee.io/)
 
-        [<i class="fa fa-github"></i> github.com/tracee/tracee](https://github.com/tracee/tracee/)
+[<i class="fa fa-github"></i> github.com/tracee/tracee](https://github.com/tracee/tracee/)
 
-        ---
+---
 
-        ## TracEE - What's in the box?
+## TracEE - What's in the box?
 
-        - Transports the MDC over thread/IO boundaries
-        - Passes an __invocationId__ through your distributed java application
-        - But: Not limited to the __invocationId__
-        - Offers a simple API for user managed _context ids_
-        - examples: _workflowId_, _transactionId_, _browserSessionId_
-        - Unobtrusive Integration
-        - No _active components_, just a _bunch of JARs_
+- Transports the MDC over thread/IO boundaries
+- Passes an __invocationId__ through your distributed java application
+- But: Not limited to the __invocationId__
+    - Offers a simple API for user managed _context ids_
+    - examples: _workflowId_, _transactionId_, _browserSessionId_
+- No _active components_, just a _bunch of JARs_
 
-        ---
+---
 
-        ## TracEE - Integration
+## TracEE - Integration
 
-        ![img](images/tracee_integration.svg)<!-- .element style="min-width:1000px" -->
+![img](images/tracee_integration.svg)<!-- .element style="min-width:1000px" -->
 
-        ---
+---
 
-        ## TracEE - Integration
+## TracEE - Integration
 
-        - Best case: Add a JAR to the classpath
-        - Worst case: Create decorator objects
-        - Adjust your log configuration
+- Best case: Add a JAR to the classpath
+- Worst case: Create decorator objects
+- Adjust your log configuration
 
-        ```xml
-        [logback.xml:PatternLayout]
-        <pattern>%d{HH:mm:ss} [%thread] [%X{TPIC.invocationId}] ⤦
-            %-5level %logger{36} %msg</pattern>
-        ```
+```xml
+[logback.xml:PatternLayout]
+<pattern>%d{HH:mm:ss} [%thread] [%X{TPIC.invocationId}] ⤦
+  %-5level %logger{36} %msg</pattern>
+```
 
-        ---
+---
 
-        ## Supported Frameworks
+## Supported Frameworks
 
-        - SLF4J
-        - Servlet 2.5+
-        - Spring MVC, WebServices, Web
-        - JAX-RS 1/2
-        - JAX-WS
-        - JMS
-        - Apache HttpClient/HttpComponents
-        - Apache CXF
-        - Quartz
-        - __SPI__: roll your own!
+- SLF4J
+- Servlet 2.5+
+- Spring MVC, WebServices, Web
+- JAX-RS 1/2
+- JAX-WS
+- JMS
+- Apache HttpClient/HttpComponents
+- Apache CXF
+- Quartz
+- SPI: roll your own!
 
-        ---
+---
 
-        ## On the wire: HTTP
+## On the wire: HTTP
 
-        ```http
-        GET http://localhost/index.html HTTP/1.1
-        Accept:text/html,*/*;q=0.8
-        TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
-        ```
+```http
+GET http://localhost/index.html HTTP/1.1
+Accept:text/html,*/*;q=0.8
+TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
+```
 
-        ```http
-        HTTP/1.1 200 Ok
-        Content-Length:6039
-        Content-Type:application/json;charset=UTF-8
-        TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
-        ```
+```http
+HTTP/1.1 200 Ok
+Content-Length:6039
+Content-Type:application/json;charset=UTF-8
+TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
+```
 
-        ---
+---
 
-        ## On the wire: SOAP
+## On the wire: SOAP
 
-        ```xml
-        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-            <soap:Header>
-                <TPIC xmlns="http://tracee.io/tpic/1.0">
-                    <entry key="TPIC.invocationId">ab827acffe</entry>
-                    <entry key="TPIC.sessionId">19096721d0ec</entry>
-                    <!-- And possibly more -->
-                </TPIC>
-            </soap:Header>
-            <!-- ... -->
-        </soap:Envelope>
-        ```
+```xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <TPIC xmlns="http://tracee.io/tpic/1.0">
+      <entry key="TPIC.invocationId">ab827acffe</entry>
+      <entry key="TPIC.sessionId">19096721d0ec</entry>
+      <!-- And possibly more -->
+    </TPIC>
+  </soap:Header>
+<!-- ... -->
+</soap:Envelope>
+```
 
-        ---
+---
 
-        # TracEE: Roadmap
+# TracEE: Roadmap
 
-        - Current Version 1.1.2
-        - __Version 1.x__ Support for legacy containers
-        - JRE 6 support
-        - Servlet 2.5 / Spring 3.2.x
-        - __Version 2.x__ Support the microservice madness, recent APIs
-        - Spring Boot, Servlet 3.1, JMS 2
-        - Apache Camel
-        - Async support where possible
-        - JavaScript frontend bindings
+- Current Version 1.1.2
+- __Version 1.x__ Support for legacy containers
+  - JRE 6 support
+  - aligned with earliest EE/Spring versions for maximal compatibility
+- __Version 2.x__ Support the microservice madness, recent APIs
+  - JavaScript frontend bindings
+  - Spring Boot, Servlet 3.1, JMS 2
+  - Apache Camel
+  - Async support where possible
 
-        ---
+---
 
-        # Demo
+# Alternative tracing approaches (OPTIONAL)
+ - [AppDynamics](https://www.appdynamics.com/) General Application monitoring. Commercial. Own infrastructure. Own Dashboard.
+ - [Zipkin](http://zipkin.io/) Performance monitoring. OSS. Library. Requires its own infrastructure. Based on Finagle, Google Dapper paper
+ - [dynaTrace](https://www.dynatrace.com/de/technology/java.html)
 
-        <i class="fa fa-rocket"></i> DO try this at home! <i class="fa fa-rocket"></i>
+---
 
-        [github.com/tracee/tracee-microservice-demo](https://github.com/tracee/tracee-microservice-demo)
+# Demo
 
-        ---
+<i class="fa fa-rocket"></i> DO try this at home! <i class="fa fa-rocket"></i>
 
-        # Q/A
+[github.com/tracee/tracee-microservice-demo](https://github.com/tracee/tracee-microservice-demo)
 
-        &nbsp;
+---
 
-        Slides: [tracee.io/docs/javaland16/](http://tracee.io/docs/javaland16/)
+# Q/A
 
-        ---
+&nbsp;
 
-        - Feedback and contributors are very welcome!
-        - Give your logs some ♥
-        - Have fun at the conference!
+Slides: [tracee.io/docs/javaland16](http://tracee.io/docs/javaland16)
 
-        [<i class="fa fa-twitter" style="color:#1da1f2"></i> @dwegener](https://twitter.com/dwegener) | [tobias.stamann@holisticon.de](tobias.stamann@holisticon.de)<br />
-        [<i class="fa fa-twitter" style="color:#1da1f2"></i> @holisticon](https://twitter.com/holisticon)
-        </script></section>
+---
+
+- Feedback and contributors are very welcome!
+- Give your logs some ♥
+- Have fun at the conference!
+
+[<i class="fa fa-twitter" style="color:#1da1f2"></i> @dwegener](https://twitter.com/dwegener) | [tobias.stamann@holisticon.de](tobias.stamann@holisticon.de)<br />
+ [<i class="fa fa-twitter" style="color:#1da1f2"></i> @holisticon](https://twitter.com/holisticon)
+</script></section>
     </div>
     <footer>
         <img src="images/brand/holisticon-logo-grey.svg" class="holisticon-logo" alt="Holisticon AG">
