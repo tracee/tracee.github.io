@@ -170,7 +170,7 @@ LOGGER.error("Something bad happened", exception);
         ...
 ```
 
-Which user won't receive his order?
+Which user will send us an angry e-mail?
 
 ---
 
@@ -204,7 +204,7 @@ Which user won't receive his order?
 16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
 ```
 
-⃨
+Which user created the order?
 
 ---
 
@@ -214,7 +214,7 @@ Which user won't receive his order?
 - Tools
     - Elasticsearch / Logstash / Kibana (ELK)
     - Splunk
-    - graylog
+    - ...
 
 ---
 
@@ -233,17 +233,10 @@ Which user won't receive his order?
 [10.0.128.3/products.log] 16:57:09 [worker-02] INFO  Fetched catalog 'b2'.
 ```
 
----
-
-## Tracing the system interaction
-
-- What if we would invent our own _thread-id_ that:
-  - survives thread boundaries
-  - survives IO boundaries
-- Let's call it __invocation-id__
-- ... and put it into the Mapped Diagnostic Context (MDC)
+... and which user created the order?
 
 ---
+
 
 ## Mapped Diagnostic Context (MDC)
 
@@ -268,10 +261,21 @@ class MDC {
 
 ## Tracing the system interaction
 
+- What if we would invent our own _thread-id_ that:
+  - survives thread boundaries
+  - survives IO boundaries
+- Let's call it __invocation-id__
+- ... and put it into the Mapped Diagnostic Context (MDC)
+
+---
+
+## Tracing the system interaction
+
 ```java
 class OrderService {
     void doOrder(Customer c, Basket b, String invocationId) {
         try {
+            if(invocationId == null) { invocationId = generateId(); }
             MDC.put("invocationId", invocationId);
             LOG.info("Creating order.");
             // IO boundary ahead!
@@ -317,7 +321,8 @@ __A library for invocation context propagation <br>in distributed Java applicati
 - But: Not limited to the __invocationId__
     - Offers a simple API for user managed _context ids_
     - examples: _workflowId_, _transactionId_, _browserSessionId_
-- No _active components_, just a _bunch of JARs_
+- Unobtrusive Integration
+  - No _active components_, just a _bunch of JARs_
 
 ---
 
@@ -352,7 +357,21 @@ __A library for invocation context propagation <br>in distributed Java applicati
 - Apache HttpClient/HttpComponents
 - Apache CXF
 - Quartz
-- SPI: roll your own!
+- __SPI__: roll your own!
+
+---
+
+# Demo
+
+<i class="fa fa-rocket"></i> DO try this at home! <i class="fa fa-rocket"></i>
+
+[github.com/tracee/tracee-microservice-demo](https://github.com/tracee/tracee-microservice-demo)
+
+---
+
+## Infrastructure
+
+![img](images/tracee-demo-infrastructure.svg)<!-- .element style="min-width:1000px" -->
 
 ---
 
@@ -395,27 +414,12 @@ TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
 - Current Version 1.1.2
 - __Version 1.x__ Support for legacy containers
   - JRE 6 support
-  - aligned with earliest EE/Spring versions for maximal compatibility
+  - Servlet 2.5 / Spring 3.2.x
 - __Version 2.x__ Support the microservice madness, recent APIs
-  - JavaScript frontend bindings
   - Spring Boot, Servlet 3.1, JMS 2
   - Apache Camel
   - Async support where possible
-
----
-
-# Alternative tracing approaches (OPTIONAL)
- - [AppDynamics](https://www.appdynamics.com/) General Application monitoring. Commercial. Own infrastructure. Own Dashboard.
- - [Zipkin](http://zipkin.io/) Performance monitoring. OSS. Library. Requires its own infrastructure. Based on Finagle, Google Dapper paper
- - [dynaTrace](https://www.dynatrace.com/de/technology/java.html)
-
----
-
-# Demo
-
-<i class="fa fa-rocket"></i> DO try this at home! <i class="fa fa-rocket"></i>
-
-[github.com/tracee/tracee-microservice-demo](https://github.com/tracee/tracee-microservice-demo)
+  - JavaScript frontend bindings
 
 ---
 
@@ -423,7 +427,7 @@ TPIC:TPIC.sessionId=19096721d0ec,TPIC.invocationId=ab827acffe,...
 
 &nbsp;
 
-Slides: [tracee.io/docs/javaland16](http://tracee.io/docs/javaland16)
+Slides: [tracee.io/docs/javaland16/](http://tracee.io/docs/javaland16/)
 
 ---
 
